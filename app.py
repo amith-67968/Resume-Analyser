@@ -20,58 +20,85 @@ st.set_page_config(
 # Custom CSS for better styling
 st.markdown("""
     <style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
     .main-header {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
         text-align: center;
-        color: #1f77b4;
+        color: #FF4B2B;
         margin-bottom: 1rem;
+        animation: fadeIn 1s ease-in-out;
     }
     .sub-header {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         text-align: center;
         color: #666;
         margin-bottom: 2rem;
-    }
-    .metric-card {
-        background-color: #f0f2f6;
-        padding: 1.5rem;
-        border-radius: 10px;
-        text-align: center;
-        margin: 1rem 0;
-    }
-    .score-excellent {
-        color: #28a745;
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
-    .score-good {
-        color: #ffc107;
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
-    .score-fair {
-        color: #fd7e14;
-        font-size: 2.5rem;
-        font-weight: bold;
-    }
-    .score-poor {
-        color: #dc3545;
-        font-size: 2.5rem;
-        font-weight: bold;
+        animation: fadeIn 1.5s ease-in-out;
     }
     .stButton>button {
         width: 100%;
-        background-color: #1f77b4;
+        background-image: linear-gradient(to right, #FF4B2B, #FF416C);
         color: white;
         font-size: 1.2rem;
         padding: 0.75rem;
         border-radius: 10px;
         border: none;
         font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 15px 0 rgba(255, 65, 108, 0.75);
     }
     .stButton>button:hover {
-        background-color: #155a8a;
+        background-image: linear-gradient(to right, #FF416C, #FF4B2B);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px 0 rgba(255, 65, 108, 0.9);
+    }
+    .stButton>button:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 15px 0 rgba(255, 65, 108, 0.75);
+    }
+    .metric-card {
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        margin: 1rem 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .score-excellent {
+        color: #28a745;
+        font-size: 2.5rem;
+        font-weight: bold;
+        animation: pulse 1.5s infinite alternate;
+    }
+    .score-good {
+        color: #ffc107;
+        font-size: 2.5rem;
+        font-weight: bold;
+        animation: pulse 1.5s infinite alternate;
+    }
+    .score-fair {
+        color: #fd7e14;
+        font-size: 2.5rem;
+        font-weight: bold;
+        animation: pulse 1.5s infinite alternate;
+    }
+    .score-poor {
+        color: #dc3545;
+        font-size: 2.5rem;
+        font-weight: bold;
+        animation: pulse 1.5s infinite alternate;
+    }
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.05); }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -99,7 +126,8 @@ def landing_page():
     
     with col2:
         st.markdown("""
-        ### Welcome to Career Compass AI
+        <div style="animation: slideIn 1s ease-out;">
+        Welcome to Career Compass AI
         
         Your intelligent career guidance platform that helps you:
         
@@ -115,7 +143,7 @@ def landing_page():
         
         ---
         
-        ### How It Works
+        How It Works
         
         1. **Upload** your resume (PDF or TXT format)
         2. **Analyze** your skills and get a career fit score
@@ -145,10 +173,12 @@ def upload_page():
     
     with col2:
         st.markdown("""
+        <div style="animation: slideIn 1s ease-out;">
         ### Upload Your Resume
         
         Please upload your resume in **PDF** or **TXT** format. 
         Our AI will analyze your skills and match them with relevant career opportunities.
+        
         """)
         
         uploaded_file = st.file_uploader(
@@ -210,7 +240,7 @@ def results_page():
         career_matches = st.session_state.career_matches
         
         # Display skills found
-        st.markdown("### 🎯 Skills Identified in Your Resume")
+        st.markdown("<div style=\"animation: slideIn 1s ease-out;\">🎯 Skills Identified in Your Resume</div>", unsafe_allow_html=True)
         st.info(f"**{resume_data['skill_count']} skills** detected from your resume")
         
         # Display skills in columns
@@ -223,7 +253,7 @@ def results_page():
         st.markdown("---")
         
         # Display top 3 career matches
-        st.markdown("### 🎯 Top Career Matches")
+        st.markdown("<div style=\"animation: slideIn 1.2s ease-out;\">🎯 Top Career Matches</div>", unsafe_allow_html=True)
         st.markdown("Based on your skills, here are your best career opportunities:")
         
         for idx, match in enumerate(career_matches[:3], 1):
@@ -233,18 +263,18 @@ def results_page():
                 with col1:
                     st.markdown("#### Match Score")
                     score_class = get_score_class(match['match_score'])
-                    st.markdown(f'<div class="{score_class}">{match["match_score"]}%</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="metric-card" style="animation: slideIn 0.5s ease-out;"><div class="{score_class}">{match["match_score"]}%</div></div>', unsafe_allow_html=True)
                     st.caption("Skills match")
                 
                 with col2:
                     st.markdown("#### Industry Demand")
-                    st.markdown(f'<div class="score-excellent">{match["demand_score"]}/100</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="metric-card" style="animation: slideIn 0.7s ease-out;"><div class="score-excellent">{match["demand_score"]}/100</div></div>', unsafe_allow_html=True)
                     st.caption("Market demand")
                 
                 with col3:
                     st.markdown("#### Overall Score")
                     score_class = get_score_class(match['combined_score'])
-                    st.markdown(f'<div class="{score_class}">{match["combined_score"]}/100</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="metric-card" style="animation: slideIn 0.9s ease-out;"><div class="{score_class}">{match["combined_score"]}/100</div></div>', unsafe_allow_html=True)
                     st.caption("Combined rating")
                 
                 st.markdown(f"**Description:** {match['description']}")
@@ -305,7 +335,7 @@ def learning_page():
         st.markdown("---")
         
         # Skills comparison
-        st.markdown("### 🎯 Skills Analysis")
+        st.markdown("<div style=\"animation: slideIn 1s ease-out;\">### 🎯 Skills Analysis</div>", unsafe_allow_html=True)
         
         col1, col2 = st.columns(2)
         
@@ -329,7 +359,7 @@ def learning_page():
         
         # Learning plan table
         if role['missing_skills']:
-            st.markdown("### 📖 Personalized Learning Plan")
+            st.markdown("<div style=\"animation: slideIn 1.2s ease-out;\">### 📖 Personalized Learning Plan</div>", unsafe_allow_html=True)
             st.markdown("Here's your roadmap to acquire the missing skills:")
             
             learning_plan = get_learning_plan(role)
@@ -348,17 +378,17 @@ def learning_page():
             df = pd.DataFrame(df_data)
             
             # Display as table with clickable links
-            st.markdown(df.to_markdown(index=False), unsafe_allow_html=True)
+            st.table(df)
             
             st.info(f"**Total Learning Time:** Approximately {total_hours} hours ({total_hours//40} weeks at 40 hours/week)")
         else:
-            st.markdown("### 📖 Personalized Learning Plan")
+            st.markdown("<div style=\"animation: slideIn 1.2s ease-out;\">### 📖 Personalized Learning Plan</div>", unsafe_allow_html=True)
             st.success("🎉 You have all the required skills for this role! No learning plan needed.")
         
         st.markdown("---")
         
         # Career roadmap
-        st.markdown("### 🚀 Career Progression Roadmap")
+        st.markdown("<div style=\"animation: slideIn 1.4s ease-out;\">### 🚀 Career Progression Roadmap</div>", unsafe_allow_html=True)
         st.markdown("Your potential career path in this field:")
         
         roadmap = generate_career_roadmap(role)

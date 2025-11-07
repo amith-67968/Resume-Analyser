@@ -101,9 +101,13 @@ def get_learning_plan(role_match: Dict) -> List[Dict]:
     missing_skills = role_match['missing_skills']
     learning_resources = role_match['learning_resources']
     
+    # Create a case-insensitive version of learning_resources
+    learning_resources_lower = {k.lower(): v for k, v in learning_resources.items()}
+    
     for skill in missing_skills:
-        if skill in learning_resources:
-            resource = learning_resources[skill]
+        skill_lower = skill.lower()
+        if skill_lower in learning_resources_lower:
+            resource = learning_resources_lower[skill_lower]
             learning_plan.append({
                 'skill': skill,
                 'youtube_link': resource['youtube'],
