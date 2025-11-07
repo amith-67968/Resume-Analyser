@@ -351,6 +351,9 @@ def learning_page():
             st.markdown(df.to_markdown(index=False), unsafe_allow_html=True)
             
             st.info(f"**Total Learning Time:** Approximately {total_hours} hours ({total_hours//40} weeks at 40 hours/week)")
+        else:
+            st.markdown("### 📖 Personalized Learning Plan")
+            st.success("🎉 You have all the required skills for this role! No learning plan needed.")
         
         st.markdown("---")
         
