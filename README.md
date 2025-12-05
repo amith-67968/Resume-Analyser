@@ -1,55 +1,81 @@
-Career Compass AI
-=================
+🚀 Career Compass AI – Resume Analysis & Career Guidance
 
-This is a Streamlit web application that analyzes resumes and provides career guidance, learning plans, and career roadmaps.
+Career Compass AI is a Streamlit-based web application that analyzes resumes and offers personalized career guidance. It suggests suitable job roles, highlights skill gaps, and provides learning resources to help users upskill and grow in their career.
 
-What I changed (frontend polish)
-- Added a consistent header and footer and wrapped page content in a glass-like `content-container` for a professional, modern look.
-- Introduced CSS variables for the primary blue accent and subtle animations (shimmer, float, background pulse) with accessibility-friendly `prefers-reduced-motion` support.
-- Improved typography and spacing, and added a small logo block in the header.
+📌 Features
 
-Deployment (recommended)
+✔ Upload resume (PDF / text)
+✔ Extracts skills from resume
+✔ Matches skills to multiple job roles
+✔ Shows skill match score (0–100)
+✔ Identifies missing / recommended skills
+✔ Displays learning resources & career roadmap
+✔ Minimal UI powered by Streamlit
+✔ No database or ML model required (static data)
 
-1) Streamlit Community Cloud (fastest, easiest):
-- Make sure this repository has a `requirements.txt` (it does).
-- Push your repo to GitHub.
-- Go to https://streamlit.io/cloud and click "New app" → connect your GitHub repo → select the branch and `app.py` as the main file → deploy.
+🏗 Project Structure
+/workspace/streamlit_template/
+├── app.py                          # Main Streamlit application (UI + routing)
+├── backend/
+│   ├── __init__.py                 # Package initializer
+│   ├── resume_parser.py            # Resume text extraction & skill detection
+│   ├── career_analyzer.py          # Skill matching & scoring logic
+│   └── data/
+│       └── job_roles_data.py       # Static job roles data (skills + roadmap)
+├── requirements.txt                # Dependencies
+└── template_config.json            # UI + configuration file (optional)
 
-2) Docker (portable; good for VPS or other providers):
-- Create a Dockerfile (example below) and build an image.
+🧠 Tech & Tools Used
+Component	Technology
+Frontend UI	Streamlit
+Resume Parsing	PyPDF2
+Skill Matching	Static Keyword Match
+Data Handling	Python Dictionaries / Pandas
+Language	Python 3.x
+🔧 Installation & Setup
+1️⃣ Clone the repository
+git clone https://github.com/your-username/career-compass-ai.git
+cd career-compass-ai
 
-Example Dockerfile:
+2️⃣ Install required dependencies
+pip install -r requirements.txt
 
-```Dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . /app
-EXPOSE 8501
-CMD ["streamlit","run","app.py","--server.port","8501","--server.address","0.0.0.0"]
-```
+3️⃣ Run the Streamlit app
+streamlit run app.py
 
-Build and run locally:
+📄 Supported Resume Format
 
-```bash
-docker build -t careercanvas:latest .
-docker run -p 8501:8501 careercanvas:latest
-```
+✔ PDF files
+✔ Text input (copy-paste resume text)
 
-3) Other platforms (Heroku / Railway / Render):
-- Use Docker or the `streamlit` command. These platforms usually accept a Docker image or can run a web process that launches Streamlit.
+🔐 All resume data stays local — no cloud upload, no database.
 
-Notes and limitations
-- Netlify is designed for static sites and cannot directly host a Streamlit server app. Use Streamlit Cloud, Docker, or container-friendly PaaS instead.
-- Backend logic was intentionally NOT modified. All changes are presentation-only.
+📊 How It Works
+Step	Action
+1	User uploads a resume
+2	System extracts skills using keyword detection
+3	Skills are matched with static job role data
+4	App calculates a match score
+5	Missing skills & learning roadmap are displayed
 
-Troubleshooting
-- If you see stale CSS after editing, open the app in an incognito window or clear the browser cache. Streamlit sometimes caches assets.
-- Ensure `requirements.txt` is up-to-date; Streamlit Cloud installs packages from it.
+The app uses simple rule-based matching to deliver fast insights without a heavy ML model.
 
-Want me to:
-- Add a Docker Compose file and a small `Procfile` for convenience?
-- Create an automatic GitHub Actions workflow that deploys to a provider when you push to `main`?
+🌱 Future Enhancements
 
-If yes, tell me which deployment target you prefer and I'll add the necessary files and CI workflow.
+🔮 NLP-based skill extraction
+📌 Real-time job market stats
+📊 Trend-based scoring
+🎯 Personalized learning path
+🔐 Save & secure user profiles with login
+
+🤝 Contributing
+
+Contributions are welcome! Feel free to fork, open an issue, or submit a pull request.
+
+📜 License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute it.
+
+⭐ If you like this project, give it a star on GitHub!
+
+💬 For ideas or issues, feel free to connect
