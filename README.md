@@ -20,17 +20,6 @@ Career Compass AI is a Streamlit-based web application that analyzes resumes and
 
 ✔ No database or ML model required (static data)
 
-🏗 Project Structure
-/workspace/streamlit_template/
-├── app.py                          # Main Streamlit application (UI + routing)
-├── backend/
-│   ├── __init__.py                 # Package initializer
-│   ├── resume_parser.py            # Resume text extraction & skill detection
-│   ├── career_analyzer.py          # Skill matching & scoring logic
-│   └── data/
-│       └── job_roles_data.py       # Static job roles data (skills + roadmap)
-├── requirements.txt                # Dependencies
-└── template_config.json            # UI + configuration file (optional)
 
 🧠 Tech & Tools Used
 Component	Technology
@@ -44,18 +33,23 @@ Language	Python 3.x
 git clone https://github.com/your-username/career-compass-ai.git
 cd career-compass-ai
 
+
 2️⃣ Install required dependencies
 pip install -r requirements.txt
 
+
 3️⃣ Run the Streamlit app
 streamlit run app.py
+
 
 📄 Supported Resume Format
 
 ✔ PDF files
 ✔ Text input (copy-paste resume text)
 
+
 🔐 All resume data stays local — no cloud upload, no database.
+
 
 📊 How It Works
 Step	Action
