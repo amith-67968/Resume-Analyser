@@ -5,12 +5,19 @@ Career Compass AI is a Streamlit-based web application that analyzes resumes and
 📌 Features
 
 ✔ Upload resume (PDF / text)
+
 ✔ Extracts skills from resume
+
 ✔ Matches skills to multiple job roles
+
 ✔ Shows skill match score (0–100)
+
 ✔ Identifies missing / recommended skills
+
 ✔ Displays learning resources & career roadmap
+
 ✔ Minimal UI powered by Streamlit
+
 ✔ No database or ML model required (static data)
 
 🏗 Project Structure
