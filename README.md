@@ -30,7 +30,7 @@ Data Handling	Python Dictionaries / Pandas
 Language	Python 3.x
 🔧 Installation & Setup
 1️⃣ Clone the repository
-git clone https://github.com/your-username/career-compass-ai.git
+git clone https://github.com/amith-67968/Resume-Analyser.git
 cd career-compass-ai
 
 
